@@ -21,6 +21,3 @@ public class PurchaseTotal {
         input.close();
     }
 }
- {
-    
-}
