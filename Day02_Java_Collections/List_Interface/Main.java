@@ -1,4 +1,4 @@
-package Java_Collections.List_Interface;
+package Day02_Java_Collections.List_Interface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
