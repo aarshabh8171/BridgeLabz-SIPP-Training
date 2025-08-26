@@ -1,0 +1,23 @@
+CLASS Transaction
+    VARIABLE id
+    VARIABLE merchant
+    VARIABLE amount
+    VARIABLE date  // includes month
+
+MAIN
+    transactions = list of Transaction
+
+    // Group by Merchant, then by Month
+    report = transactions.stream()
+               .collect(groupBy(
+                   transaction.merchant,
+                   groupBy(transaction.date.month,
+                           summingDouble(transaction.amount)
+                   )
+               ))
+
+    // Display report
+    FOR each merchant in report
+        PRINT "Merchant: " + merchant
+        FOR each month, total in report[merchant]
+            PRINT month + " : " + total
