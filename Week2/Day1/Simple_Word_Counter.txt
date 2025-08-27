@@ -1,0 +1,18 @@
+FUNCTION wordCounter(text)
+    words = split text by spaces
+    frequencyMap = Map<String, Integer>()
+
+    FOR word in words
+        word = lowercase(removePunctuation(word))
+        frequencyMap[word] = frequencyMap.getOrDefault(word, 0) + 1
+
+    // Sort by frequency
+    sortedList = sortByValueDescending(frequencyMap)
+
+    PRINT sortedList
+
+MAIN
+    text = "The news today is about the rise in technology trends."
+    wordCounter(text)
+
+// Output: the=2, about=1, in=1, is=1, news=1, rise=1, technology=1, today=1, trends=1
