@@ -1,0 +1,40 @@
+CLASS Ticket
+    VARIABLE movieName
+    VARIABLE seatNumber
+    VARIABLE price
+    VARIABLE status   // booked / cancelled
+
+CLASS Theatre
+    VARIABLE movieSchedule
+    VARIABLE availableSeats
+    VARIABLE issuedTickets
+
+    METHOD issueTicket(movie, seat, customer)
+        IF seat IN availableSeats THEN
+            ticket = new Ticket(movie, seat, price=200, status="booked")
+            issuedTickets.add(ticket)
+            availableSeats.remove(seat)
+            RETURN ticket
+        ELSE
+            PRINT "Seat not available"
+
+    METHOD cancelTicket(ticket)
+        ticket.status = "cancelled"
+        availableSeats.add(ticket.seatNumber)
+        PRINT "Ticket cancelled and seat freed"
+
+CLASS Customer
+    VARIABLE name
+
+    METHOD bookTicket(theatre, movie, seat)
+        RETURN theatre.issueTicket(movie, seat, self)
+
+    METHOD cancelTicket(theatre, ticket)
+        theatre.cancelTicket(ticket)
+
+MAIN
+    theatre = Theatre(movies=["Avengers"], seats=["A10", "A11", "A12"])
+    customer = Customer("Ravi")
+
+    ticket1 = customer.bookTicket(theatre, "Avengers", "A12")
+    customer.cancelTicket(theatre, ticket1)
