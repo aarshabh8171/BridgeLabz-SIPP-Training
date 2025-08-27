@@ -1,0 +1,31 @@
+CLASS User
+    VARIABLE username
+    VARIABLE password
+
+    METHOD login()
+        PRINT "Base login – validate credentials"
+
+CLASS Student EXTENDS User
+    VARIABLE enrolledCourses
+
+    METHOD login()
+        IF validateCredentials(username, password) AND enrolledCourses NOT EMPTY THEN
+            PRINT "Student login successful – show available exams"
+        ELSE
+            PRINT "Login failed: not registered or not enrolled"
+
+CLASS Admin EXTENDS User
+    VARIABLE adminPrivileges
+
+    METHOD login()
+        IF validateCredentials(username, password) AND adminPrivileges = TRUE THEN
+            PRINT "Admin login successful – show exam management tools"
+        ELSE
+            PRINT "Login failed: insufficient privileges"
+
+MAIN
+    user1 = Student("john123", "pass123", ["Math", "CS"])
+    user2 = Admin("admin01", "adminpass", TRUE)
+
+    user1.login()  // checks student enrollment
+    user2.login()  // checks admin privileges
