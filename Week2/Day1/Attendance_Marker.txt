@@ -1,0 +1,23 @@
+CLASS AttendanceSystem
+    VARIABLE records[students][days]   // 2D array of P/A
+
+    METHOD markAttendance(studentId, day, status)
+        records[studentId][day] = status
+
+    METHOD updateAttendance(studentId, day, newStatus)
+        records[studentId][day] = newStatus
+
+    METHOD generateReport(studentId)
+        presentCount = 0
+        FOR each day in records[studentId]
+            IF records[studentId][day] == "P"
+                presentCount++
+        PRINT "Student " + studentId + " was present " + presentCount + " days."
+
+MAIN
+    system = AttendanceSystem(5 students, 30 days)
+
+    system.markAttendance(1, 1, "P")
+    system.markAttendance(1, 2, "A")
+    system.updateAttendance(1, 2, "P")
+    system.generateReport(1)
