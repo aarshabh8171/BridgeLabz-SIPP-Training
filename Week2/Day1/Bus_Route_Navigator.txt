@@ -1,0 +1,43 @@
+CLASS Node
+    VARIABLE stopName
+    VARIABLE next
+
+CLASS LinkedList
+    VARIABLE head
+
+    METHOD insertAfter(targetStop, newStop)
+        temp = head
+        WHILE temp NOT NULL
+            IF temp.stopName == targetStop THEN
+                newNode = Node(newStop)
+                newNode.next = temp.next
+                temp.next = newNode
+                BREAK
+            temp = temp.next
+
+    METHOD deleteStop(stopName)
+        temp = head
+        prev = NULL
+        WHILE temp NOT NULL
+            IF temp.stopName == stopName THEN
+                prev.next = temp.next
+                BREAK
+            prev = temp
+            temp = temp.next
+
+    METHOD searchStop(stopName)
+        temp = head
+        WHILE temp NOT NULL
+            IF temp.stopName == stopName
+                RETURN TRUE
+            temp = temp.next
+        RETURN FALSE
+
+MAIN
+    route = LinkedList()
+    route.head = Node("Depot → Main Street → City Mall → Hospital → Airport")
+
+    route.insertAfter("City Mall", "University")
+    route.deleteStop("Hospital")
+
+    PRINT route.searchStop("Airport")   // TRUE
