@@ -1,0 +1,27 @@
+CLASS Zone
+    VARIABLE zoneId
+    VARIABLE crimeCount
+    VARIABLE neighbors = []
+
+CLASS CityGraph
+    VARIABLE zones = Map<id, Zone>
+
+    METHOD addConnection(z1, z2)
+        zones[z1].neighbors.add(zones[z2])
+        zones[z2].neighbors.add(zones[z1])
+
+FUNCTION DFS(zone, visited, threshold)
+    MARK zone as visited
+    IF zone.crimeCount > threshold
+        PRINT "High Risk Zone: " + zone.zoneId
+    FOR neighbor in zone.neighbors
+        IF neighbor NOT visited
+            DFS(neighbor, visited, threshold)
+
+MAIN
+    city = CityGraph()
+    // add zones + crime data
+    visited = empty set
+    FOR each zone in city
+        IF zone NOT visited
+            DFS(zone, visited, threshold=50)

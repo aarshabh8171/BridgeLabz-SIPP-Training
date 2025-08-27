@@ -1,0 +1,21 @@
+CLASS Course
+    VARIABLE courseId
+    VARIABLE name
+
+CLASS Student
+    VARIABLE studentId
+    VARIABLE name
+
+MAIN
+    courseMap = Map<Course, List<Student>>
+
+    // Add students
+    courseMap[JavaCourse].add(Student(1, "Alice"))
+    courseMap[JavaCourse].add(Student(2, "Bob"))
+    courseMap[DBCourse].add(Student(3, "Charlie"))
+
+    // Display students per course
+    FOR each entry in courseMap
+        PRINT "Course: " + entry.key.name
+        FOR each student in entry.value
+            PRINT student.name
