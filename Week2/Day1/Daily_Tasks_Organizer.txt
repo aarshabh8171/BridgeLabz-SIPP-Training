@@ -1,0 +1,25 @@
+CLASS DailyTasks
+    VARIABLE tasks = LinkedHashMap<Integer, String>
+    VARIABLE taskId = 0
+
+    METHOD addTask(description)
+        taskId++
+        tasks.put(taskId, description)
+
+    METHOD removeTask(id)
+        tasks.remove(id)
+
+    METHOD viewTasks()
+        FOR entry in tasks
+            PRINT entry.key + " → " + entry.value
+
+MAIN
+    organizer = DailyTasks()
+    organizer.addTask("Check emails")
+    organizer.addTask("Prepare sales report")
+    organizer.addTask("Call client")
+
+    organizer.removeTask(2)
+
+    organizer.viewTasks() 
+    // Output: 1 → Check emails, 3 → Call client
